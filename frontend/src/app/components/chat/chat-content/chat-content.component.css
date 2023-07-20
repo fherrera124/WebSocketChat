@@ -1,0 +1,94 @@
+::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(75, 75, 75);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  border-radius: 5px;
+}
+
+.chatBox {
+  margin: 100px auto 0;
+  background-color: rgb(50, 50, 50);
+  background: linear-gradient(rgba(100, 100, 100, 0.5), rgba(50, 50, 50));
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  padding: 5px 50px;
+  height: 60vh;
+  overflow: auto;
+}
+
+.msg_container {
+  border-radius: 0.375rem;
+  position: relative;
+  width: fit-content;
+  max-width: 80%;
+  word-wrap: break-word;
+  hyphens: auto;
+  margin-top: -0.3rem;
+  margin-bottom: 0.5rem;
+  padding: 6px 10px 6px 15px;
+  font-size: 0.9em;
+}
+
+.timestamp {
+  padding: 0.5rem 0 0 0.5rem;
+  white-space: nowrap;
+  font-size: 0.85em;
+  opacity: 0.5;
+  float: right;
+}
+
+.author {
+  text-shadow: 0px 0px 4px;
+  font-weight: bold;
+  margin: -4px auto 4px -4px;
+}
+
+.firstMsg {
+  margin-top: 0.5rem !important;
+}
+
+.my_message {
+  margin-left: auto;
+  background-color: rgb(200, 200, 200);
+}
+
+.firstMsg > .my_message::after {
+  content: '';
+  top: 0;
+  position: absolute;
+  right: -12px;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, rgba(200, 200, 200) 0%, rgba(200, 200, 200) 50%, transparent 50%, transparent);
+}
+
+.remote_message {
+  color: rgba(248, 249, 250, 1);
+  background-color: rgba(13, 103, 253, 1);
+}
+
+.firstMsg > .remote_message::before {
+  content: '';
+  top: 0;
+  position: absolute;
+  left: -12px;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(225deg, rgb(13, 103, 253) 0%, rgba(13, 103, 253) 50%, transparent 50%, transparent);
+}
+
+.onOverflow {
+  overflow-wrap: anywhere;
+}

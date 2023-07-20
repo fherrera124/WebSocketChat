@@ -1,0 +1,21 @@
+<div #container class="chatBox">
+    <div [ngClass]="{'firstMsg': !message.cont}" *ngFor="let message of messages">
+
+        <div class="msg_container my_message" *ngIf="isLocalUser(message.from); else remote_message">
+
+            <span class="onOverflow">{{message.text}}</span>
+            <span class="timestamp">{{message.time}}</span>
+
+        </div>
+
+        <ng-template #remote_message>
+            <div class="msg_container remote_message">
+                <div class="author" *ngIf="!message.cont">{{message.from}}</div>
+
+                <span class="onOverflow">{{message.text}}</span>
+                <span class="timestamp">{{message.time}}</span>
+            </div>
+        </ng-template>
+
+    </div>
+</div>

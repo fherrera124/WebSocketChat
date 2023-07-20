@@ -1,0 +1,13 @@
+.form {
+    width: fit-content;
+    margin: 100px auto;
+    background: linear-gradient(#AAA, #666);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 50px 50px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+.form input {
+    margin-bottom: 20px;
+}
