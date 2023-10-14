@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { UserService } from '../../services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,17 +9,19 @@ import { UserService } from '../../services/user.service';
 })
 export class NavbarComponent {
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private storageService: StorageService,
+    private authService: AuthService) { }
   
   userName() {
-    return this.userService.getUser();
+    return this.storageService.getUser();
   }
 
   isLogged(){
-    return this.userService.isLogged();
+    return this.storageService.isLoggedIn();
   }
 
   logout(){
-    this.userService.logout();
+    this.authService.logout();
   }
 }

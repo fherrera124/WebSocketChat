@@ -1,0 +1,56 @@
+## Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
+spring:
+  datasource:
+    url: jdbc:h2:file:./chat/src/main/resources/security
+    username: chat
+    password: chat
+    driver-class-name: org.h2.Driver
+  h2:
+    console.enabled: true
+
+  devtools:
+    restart:
+      exclude: "**/*.db"
+
+  ## Hibernate Properties
+  # The SQL dialect makes Hibernate generate better SQL for the chosen database
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show_sql: false
+    properties:
+      hibernate:
+        # format_sql: true
+    database: h2
+    database-platform: org.hibernate.dialect.H2Dialect
+
+# FATAL ERROR WARN INFO DEBUG TRACE
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO
+    sql: INFO
+    dev.websocket.chat: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.springframework.transaction: TRACE
+    net.ttddyy.dsproxy.listener: debug
+
+server:
+  port: 8090
+  servlet:
+    session:
+      timeout: 1m
+
+application:
+  security:
+    jwt:
+      secret-key: 26030f3c207971c19139deb0651ff99fd593e1c03d66bc1b1330a1e19388a24899f8d0b2048d376adb3f0465220bb47b3b50c54f14edddce3ed36108f13c1d94f798ed22c817af045516a6cbc0c60d252ff072fb8b7b9d6194b7eb50ddb5b8d0
+      expiration: 60000 #60000 # expiration of access token (a minute)
+      refresh-token:
+        expiration: 86400000 # expiration if refresh token (a day)
+        jwt-refresh-cookie: jwt-refresh
+# agrega la coockie
+springdoc:
+  swagger-ui.csrf:
+    enabled: true

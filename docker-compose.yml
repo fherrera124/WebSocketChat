@@ -1,0 +1,15 @@
+version: '3.4'
+services:
+  db:
+    image: mariadb:10.11-rc
+    command: --lower_case_table_names=0
+    restart: unless-stopped
+    volumes:
+      - ./db:/var/lib/mysql
+    environment:
+      MARIADB_DATABASE: chat
+      MARIADB_ROOT_PASSWORD: chat
+    ports:
+      - 3306:3306
+volumes:
+  dbData:

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { StompService } from 'src/app/services/stomp.service';
-import { UserService } from 'src/app/services/user.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-send-message',
@@ -10,14 +10,24 @@ import { UserService } from 'src/app/services/user.service';
 export class SendMessageComponent {
 
   message: string = "";
+  waitingReceipt = false;
 
-  constructor(private stompService: StompService, private userService: UserService) { }
+  constructor(private stompService: StompService, private storageService: StorageService) { }
 
   sendMessage() {
     if (this.message.trim() !== '') {
-      this.stompService.pub("/app/chat", { from: this.userService.getUser(), text: this.message });
+      this.waitingReceipt = true;
+      this.stompService.pub("/app/chat", { from: this.storageService.getUser(), text: this.message })
+        .subscribe({
+          next: (receipt) => {
+            if (receipt) {
+              this.message = "";
+            }
+          },
+          complete: () => this.waitingReceipt = false,
+          error: (err) => this.waitingReceipt = false
+        });
     }
-    this.message = "";
   }
 
 }

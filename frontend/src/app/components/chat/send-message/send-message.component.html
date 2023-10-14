@@ -1,6 +1,6 @@
 <div class="mt-5 d-flex">
     <input class="form-control" [(ngModel)]="message" (keyup.enter)="sendMessage()">
-    <button id="btn-send" class="btn ms-2" (click)="sendMessage()">
+    <button [disabled]="waitingReceipt" id="btn-send" class="btn ms-2" (click)="sendMessage()">
         <i class="fa-solid fa-paper-plane"></i>
     </button>
 </div>

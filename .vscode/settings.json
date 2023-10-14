@@ -1,0 +1,8 @@
+{
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.compile.nullAnalysis.mode": "automatic",
+  "editor.renderWhitespace": "selection",
+  "editor.indentSize": "tabSize",
+  "editor.tabSize": 4,
+  "editor.detectIndentation": false
+}

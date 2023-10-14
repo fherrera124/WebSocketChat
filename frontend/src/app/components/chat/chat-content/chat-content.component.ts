@@ -33,12 +33,14 @@ export class ChatContentComponent implements OnInit, OnDestroy {
 
   lastUser: String = "";
 
-  constructor(private stompService: StompService, private userService: UserService) { }
+  constructor(
+    private stompService: StompService,
+    private userService: UserService) { }
 
   ngOnInit() {
     this.topicSubscription = this.stompService.sub({ destination: "/topic/messages" }).subscribe((message: IMessage) => {
 
-      let msg: Message = JSON.parse(message.body);
+      const msg: Message = JSON.parse(message.body);
 
       msg.cont = msg.from == this.lastUser;
 
@@ -56,10 +58,6 @@ export class ChatContentComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.topicSubscription.unsubscribe();
-  }
-
-  clickDisconnect() {
-    this.stompService.disconnect();
   }
 
   isLocalUser(user: String): boolean {

@@ -1,4 +1,5 @@
-<div class="form rounded">
-    <input type="text"  class="form-control" placeholder="Nombre..." [(ngModel)]="name">
-    <button class="btn btn-primary" (click)="login()">Ingresar</button>
+<div [formGroup]="fg" class="form rounded">
+    <input type="text"  class="form-control" placeholder="Nombre..." formControlName="username">
+    <input type="text"  class="form-control" placeholder="Contraseña..." formControlName="password">
+    <button class="btn btn-primary" (click)="onSubmit()">Ingresar</button>
 </div>

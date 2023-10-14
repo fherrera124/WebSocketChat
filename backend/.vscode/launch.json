@@ -2,11 +2,11 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Spring Boot-ChatApplication<chat>",
+            "name": "Spring Boot-ChatApplication<backend>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "mainClass": "com.websocket.chat.ChatApplication",
-            "projectName": "chat",
+            "mainClass": "dev.websocket.chat.ChatApplication",
+            "projectName": "backend",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
