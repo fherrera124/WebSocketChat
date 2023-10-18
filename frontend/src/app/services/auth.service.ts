@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { StorageService } from './storage.service';
 
-export const AUTH_API = 'http://localhost:8090/api/v1/auth';
+export const AUTH_API = 'http://localhost:8090/app/api/v1/auth';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }), withCredentials: true

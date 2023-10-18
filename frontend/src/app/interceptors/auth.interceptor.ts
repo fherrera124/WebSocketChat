@@ -24,7 +24,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    if (!req.url.includes('/api/v1/auth/csrf')) {
+    if (!req.url.includes('/app/api/v1/auth/csrf')) {
       const xsrfToken = this.xsrfTokenService.getXsrfToken();
       if (xsrfToken != null) {
         req = req.clone({ setHeaders: { 'X-XSRF-TOKEN': xsrfToken } });
@@ -35,7 +35,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 
     return next.handle(req).pipe(
       tap((res: HttpEvent<any>) => {
-        if (req.url.includes('/api/v1/auth/authenticate')) {
+        if (req.url.includes('/app/api/v1/auth/authenticate')) {
           if (res instanceof HttpResponse) {
             this.storageService.storeAccessToken(res.body);
           }
@@ -44,7 +44,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
       catchError((error) => {
         if (
           error instanceof HttpErrorResponse &&
-          !req.url.includes('/api/v1/auth/authenticate') &&
+          !req.url.includes('/app/api/v1/auth/authenticate') &&
           error.status === 401
         ) {
           return this.handle401Error(req, next);

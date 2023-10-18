@@ -1,3 +1,12 @@
+# Empaquetado:
+
+~~https://marco.dev/angular-with-java~~
+
+
+Muy interesante, aprendí mucho de dicho proyecto:
+
+https://github.com/mpalourdio/SpringBootAngularHTML5
+
 # Seguridad:
 
 https://www.youtube.com/watch?v=KxqlJblhzfI
@@ -65,3 +74,7 @@ https://stackoverflow.com/a/66671871
 # TODO: implementar Redis
 
 https://www.baeldung.com/spring-data-redis-tutorial
+
+# MongoDB
+
+# Casandra

@@ -24,7 +24,7 @@ export class StompService {
 
         this.rxStomp = new RxStomp();
         this.rxStomp.configure({
-            brokerURL: "ws://localhost:8090/secured/chat",
+            brokerURL: "ws://localhost:8090/app/secured/chat",
             reconnectDelay: 10000,
             beforeConnect: (mainStompCLient: RxStomp): Promise<void> => {
 

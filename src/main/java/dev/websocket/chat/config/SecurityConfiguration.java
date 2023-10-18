@@ -2,6 +2,7 @@ package dev.websocket.chat.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,6 +14,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 import org.springframework.security.web.csrf.XorCsrfTokenRequestAttributeHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,6 +28,13 @@ public class SecurityConfiguration {
     private final AuthenticationProvider authenticationProvider;
 
     private static final String[] PERMIT_ALL_PATTERNS = {
+
+        // propios del frontend
+            "/",
+            "/index.html",
+            "/chat",
+            "/login",
+
             "/api/v1/auth/**",
             "/swagger-ui/**",
             "/v3/api-docs/**",
@@ -41,7 +50,8 @@ public class SecurityConfiguration {
             "/secured/success" };
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, HandlerMappingIntrospector introspector)
+            throws Exception {
 
         XorCsrfTokenRequestAttributeHandler delegate = new XorCsrfTokenRequestAttributeHandler();
         // set the name of the attribute the CsrfToken will be populated on
@@ -59,9 +69,11 @@ public class SecurityConfiguration {
 
                 .csrf((csrf) -> csrf
                         // .disable()
+
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                         .csrfTokenRequestHandler(requestHandler)
-                        .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")))
+                        .ignoringRequestMatchers(
+                                AntPathRequestMatcher.antMatcher("/h2-console/**")))
 
                 .cors(Customizer.withDefaults()) // The cors() method will add the default
                 // Spring-provided CorsFilter to the
@@ -79,6 +91,17 @@ public class SecurityConfiguration {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
+    }
+
+    @Bean
+    @Order(-1)
+    SecurityFilterChain staticResources(HttpSecurity http) throws Exception {
+
+        http.securityMatchers(matches -> matches.requestMatchers(
+                "/static/**"))
+                .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll());
 
         return http.build();
     }

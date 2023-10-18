@@ -1,5 +1,6 @@
 package dev.websocket.chat.demo;
 
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,19 @@ import jakarta.servlet.http.HttpServletResponse;
 @CrossOrigin
 @RequestMapping("/api/v1/demo-controller")
 @SecurityRequirement(name = "bearerAuth")
-public class DemoController {
+public class DemoController implements ErrorController {
+
+    private static final String PATH = "/error";
+
+    @RequestMapping(value = PATH)
+    public String error() {
+        return "forward:/index.html";
+    }
+
+    /* @Override
+    public String getErrorPath() {
+        return PATH;
+    } */
 
     @GetMapping
     public ResponseEntity<String> sayHello() {

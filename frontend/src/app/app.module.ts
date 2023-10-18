@@ -11,6 +11,7 @@ import { SendMessageComponent } from './components/chat/send-message/send-messag
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { httpInitializerProviders, httpInterceptorProviders } from './interceptors/auth.interceptor';
+import { AppBaseHrefWithoutStaticProvider } from './factory/app-base-href-without-static-provider.factory';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { httpInitializerProviders, httpInterceptorProviders } from './intercepto
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [httpInterceptorProviders, httpInitializerProviders],
+  providers: [httpInterceptorProviders, httpInitializerProviders, AppBaseHrefWithoutStaticProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

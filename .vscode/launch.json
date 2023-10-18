@@ -5,7 +5,7 @@
             "name": "Spring Boot-ChatApplication<chat>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "mainClass": "dev.websocket.chat.ChatApplication",
+            "mainClass": "src.main.java.com.websocket.chat.ChatApplication",
             "projectName": "chat",
             "args": "",
             "envFile": "${workspaceFolder}/.env"

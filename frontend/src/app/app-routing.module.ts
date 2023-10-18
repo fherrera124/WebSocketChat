@@ -7,7 +7,8 @@ import { IsLoggedGuard } from './guards/is-logged.guard';
 const routes: Routes = [
   { path: "", redirectTo: "/chat", pathMatch: "full" },
   { path: "login", component: LoginComponent },
-  { path: "chat", component: ChatComponent, canActivate: [() => inject(IsLoggedGuard).canActivate()]}
+  { path: "chat", component: ChatComponent, canActivate: [() => inject(IsLoggedGuard).canActivate()]},
+  { path: "**", redirectTo: "chat"}
 ];
 
 @NgModule({

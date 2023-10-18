@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: h2
+  output:
+    ansi:
+      enabled: always
+logging:
+  level:
+    org.springframework.web: DEBUG
+server:
+  port: 8090
+  servlet:
+    context-path: /app
+  compression:
+    enabled: true
+    mime-types: application/javascript,application/json,text/css,text/html,text/plain
