@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,6 +25,7 @@ import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -42,6 +44,8 @@ public class JwtService {
     private long refreshExpiration;
     @Value("${application.security.jwt.refresh-token.jwt-refresh-cookie}")
     private String refreshCookieName;
+    @Autowired
+    private ServletContext context;
 
     private final TokenRepository tokenRepository;
 
@@ -83,7 +87,8 @@ public class JwtService {
     }
 
     public ResponseCookie generateRefreshJwtCookie(String refreshToken) {
-        return ResponseCookie.from(refreshCookieName, refreshToken).path("/api/v1/auth/refresh-token")
+        return ResponseCookie.from(refreshCookieName, refreshToken)
+                .path(context.getContextPath() + "/api/v1/auth/refresh-token")
                 .maxAge(24 * 60 * 60).httpOnly(true).build();
     }
 
