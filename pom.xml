@@ -177,8 +177,6 @@
                 </executions>
             </plugin>
 
-
-            <!-- build Angular frontend resources -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -218,7 +216,7 @@
                     <workingDirectory>${basedir}/frontend</workingDirectory>
                 </configuration>
             </plugin>
-            <!-- Copy Angular resources to Spring Boot resource files -->
+
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>3.1.0</version>
@@ -264,8 +262,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-
         </plugins>
     </build>
 
